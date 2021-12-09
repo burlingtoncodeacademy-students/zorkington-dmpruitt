@@ -3,9 +3,10 @@ const readlineInterface = readline.createInterface(
   process.stdin,
   process.stdout
 );
-
+// handy prompt for the user
 let prompt = "\n >_ ";
 
+// Class for each of the rooms
 class Room {
   constructor(name, description, connectionsArray, inventoryArray) {
     this.name = name;
@@ -13,10 +14,12 @@ class Room {
     this.connections = connectionsArray || [];
     this.inventory = inventoryArray || [];
   }
+  // returns the inventory for the Room Class
   inv() {
     return `${this.name} current inventory is: ${this.inventory.join(", ")} `; // returns requested inventory
   }
 }
+// Class for the Items in the world
 class Items {
   constructor(name, description, movable, whenAdded) {
     this.name = name;
@@ -24,6 +27,7 @@ class Items {
     this.movable = movable || true;
     this.whenAdded = whenAdded;
   }
+  // if the item is able to be taken, then the item is picked up
   take() {
     if (this.movable) {
       // currentPlayer.inventory.push(this.name)
@@ -33,13 +37,14 @@ class Items {
     }
   }
 }
-
+// Class for the Player
 class Player {
   constructor(name, inventoryArray, statusBool) {
     this.name = name || "PlayerOne";
     this.inventory = inventoryArray || [];
     this.status = statusBool || true; // Player true = playing game, false = end of game
   }
+  // displays the player's current inventory
   inv() {
     return `Your current inventory is: ${this.inventory.join(", ")} `; // returns requested inventory
   }
@@ -65,6 +70,7 @@ class Player {
   }
 }
 
+// Here is the area where the items are created
 let sign = new Items(
   "Sign",
   "Welcome to Burlington Code Academy! Come on up to the third floor.\nIf the door is locked, use the code 12345.",
@@ -74,7 +80,16 @@ let sign = new Items(
 
 let sword = new Items("sword", "Shiny and sharp", true, "Oooo, pretty!");
 
-let scabbard = new Items("scabbord", "functional, but in rough condition", true, "Might just fit that sword. ");
+let scabbard = new Items(
+  "scabbord",
+  "functional, but in rough condition",
+  true,
+  "Might just fit that sword. "
+);
+
+// End Item creation area
+
+// Begin Room creation area
 
 let startRoom = new Room(
   "startRoom",
@@ -116,12 +131,9 @@ let roomFive = new Room(
   ["scabbord"]
 );
 
-let Exit = new Room(
-  "Exit",
-  "Looks like a way out",
-  ["roomFive"],
-  []
-);
+let Exit = new Room("Exit", "Looks like a way out", ["roomFive"], []);
+
+// End Room creation area
 
 let currentLocation = startRoom;
 
@@ -136,6 +148,9 @@ let transitions = {
   startRoom: ["foyer"],
   foyer: ["startRoom", "roomTwo"],
   roomTwo: ["foyer", "roomThree"],
+  roomThree: ["roomTwo", "roomFour"],
+  roomFour: ["roomThree", "roomFive"],
+  roomFive: ["roomThree", "Exit"],
 };
 
 function ask(questionText) {
@@ -153,10 +168,21 @@ On the door is a handwritten sign. `;
   let answer = await ask(`${welcomeMessage} ${prompt}`);
 
   while (answer !== "exit") {
+
+// Here is where I need to write the if statements that check all the things.
+
+
+
+
+
+
+
+
+
+
     answer = await ask(`Sorry, I don't know how to ${answer} ${prompt}`);
   }
   process.exit();
 }
 
 start();
-
