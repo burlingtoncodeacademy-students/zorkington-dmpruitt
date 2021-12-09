@@ -74,11 +74,20 @@ let sign = new Items(
 
 let sword = new Items("sword", "Shiny and sharp", true, "Oooo, pretty!");
 
+let scabbard = new Items("scabbord", "functional, but in rough condition", true, "Might just fit that sword. ");
+
 let startRoom = new Room(
   "startRoom",
   "182 Main St. You are standing on Main Street between Church and South Winooski. There is a door here. A keypad sits on the handle. On the door is a handwritten sign.",
   ["foyer"],
   ["sign", "sword"]
+);
+
+let foyer = new Room(
+  "foyer",
+  "Like any other foyer in the area",
+  ["startRoom", "roomThree"],
+  []
 );
 
 let roomTwo = new Room(
@@ -88,9 +97,29 @@ let roomTwo = new Room(
   []
 );
 let roomThree = new Room(
-  "foyer",
-  "Like any other foyer in the area",
-  ["startRoom", "roomThree"],
+  "roomThree",
+  "Like any other room3 in the area",
+  ["roomTwo", "roomFour"],
+  []
+);
+let roomFour = new Room(
+  "roomFour",
+  "Like any other room3 in the area",
+  ["roomThree", "roomFive"],
+  []
+);
+
+let roomFive = new Room(
+  "roomFive",
+  "Like any other room3 in the area, except for the scabbord ",
+  ["roomFour", "Exit"],
+  ["scabbord"]
+);
+
+let Exit = new Room(
+  "Exit",
+  "Looks like a way out",
+  ["roomFive"],
   []
 );
 
@@ -131,42 +160,3 @@ On the door is a handwritten sign. `;
 
 start();
 
-// I will be coming back to finish this project once I have a better grasp on these concepts.
-
-// TESTING AREA - Trying to get things to work
-
-// console.log("line15");
-// console.log(currentPlayer.inv());
-// console.log("line17");
-// //currentPlayer.inventory.push('icicle')
-//currentPlayer.take("thing"); // takes a string to the end of the currentPlayer's inventory array
-// console.log("line21");
-// currentPlayer.inv();
-// console.log("line23");
-// console.log(currentPlayer.inventory);
-// console.log("line25");
-// console.log(currentPlayer.inv());
-// console.log("line27");
-
-// This lookup table is for items that are able to be picked up.
-// let lookupTable = {
-//   sign: "sign",
-//   sword: "sword"
-// };
-
-//console.log(sign.description);
-
-//currentPlayer.drop("sword");
-// console.log(currentLocation.inventory);
-// console.log("line95");
-// currentPlayer.take("sword");
-// console.log("line97");
-// console.log(currentPlayer.inv());
-// console.log("line99");
-// console.log(currentLocation.inv());
-// console.log("line101");
-// currentPlayer.take("sign");
-// console.log(currentLocation.inv());
-// console.log(currentLocation.descr);
-// console.log(currentLocation.connections);
-// console.log(lookupTable[sword].take)
