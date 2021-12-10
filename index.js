@@ -6,6 +6,8 @@ const readlineInterface = readline.createInterface(
 // handy prompt for the user
 let prompt = "\n >_ ";
 
+// CLASS SECTION
+
 // Class for each of the rooms
 class Room {
   constructor(name, description, connectionsArray, inventoryArray) {
@@ -70,6 +72,8 @@ class Player {
   }
 }
 
+// END CLASS CREATION SECTION
+
 // Here is the area where the items are created
 let sign = new Items(
   "Sign",
@@ -130,20 +134,25 @@ let roomFive = new Room(
   ["roomFour", "Exit"],
   ["scabbord"]
 );
-
+// this is the destination for the game
 let Exit = new Room("Exit", "Looks like a way out", ["roomFive"], []);
 
 // End Room creation area
 
+// holds the location of the player
 let currentLocation = startRoom;
 
+// initially intended on having multiple players as an option, player class allows creation of multiple players
 let currentPlayer = new Player();
 
+// lookupTable is use for the objects that were created for the world
 let lookupTable = {
   sign: "sign",
   sword: "sword",
+  scabbard: "scabbord",
 };
 
+// transitions holds the allowable places that the player can move to from the current location
 let transitions = {
   startRoom: ["foyer"],
   foyer: ["startRoom", "roomTwo"],
@@ -153,32 +162,25 @@ let transitions = {
   roomFive: ["roomThree", "Exit"],
 };
 
+// used to get player's input
 function ask(questionText) {
   return new Promise((resolve, reject) => {
     readlineInterface.question(questionText, resolve);
   });
 }
 
+// ******* BEGINNING OF THE MAIN START FUNCTION *******
 async function start() {
   const welcomeMessage = `182 Main St.
 You are standing on Main Street between Church and South Winooski.
 There is a door here. A keypad sits on the handle.
 On the door is a handwritten sign. `;
 
+  // here is the initial ask to the player
   let answer = await ask(`${welcomeMessage} ${prompt}`);
 
   while (answer !== "exit") {
-
-// Here is where I need to write the if statements that check all the things.
-
-
-
-
-
-
-
-
-
+    // Here is where I need to write the if statements that check all the things.
 
     answer = await ask(`Sorry, I don't know how to ${answer} ${prompt}`);
   }
